@@ -2,29 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Todo;
 
 class TodoController extends Controller
 {
     // Fetch paginated todos here
-    public function index() {
+    public function index()
+    {
         $todos = Todo::latest()->paginate(10);
+
         return response()->json($todos);
     }
 
     // Fetch todo using id here
-    public function update($id) {
+    public function update($id)
+    {
         $todo = Todo::find($id);
 
-        if(!empty($todo)){
+        if (! empty($todo)) {
             $todo->update([
-                'status' => $todo->status == 'pending' ? 'done' : 'pending'
+                'status' => $todo->status == 'pending' ? 'done' : 'pending',
             ]);
+
             return response()->json($todo);
-        }else{
+        } else {
             return response()->json([
-                'error' => 'Todo item not found'
+                'error' => 'Todo item not found',
             ], 404);
         }
 

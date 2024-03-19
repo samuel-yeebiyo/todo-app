@@ -13,10 +13,10 @@ class CompleteTodoItems implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-    * The number of times the job may be attempted.
-    *
-    * @var int
-    */
+     * The number of times the job may be attempted.
+     *
+     * @var int
+     */
     protected $tries = 3;
 
     protected $todo_chunk = null;
@@ -34,10 +34,10 @@ class CompleteTodoItems implements ShouldQueue
      */
     public function handle(): void
     {
-        foreach($this->todo_chunk as $todo){
-            if($todo->status == 'pending'){
+        foreach ($this->todo_chunk as $todo) {
+            if ($todo->status == 'pending') {
                 $todo->update([
-                    'status'=>'done'
+                    'status' => 'done',
                 ]);
             }
         }

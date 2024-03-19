@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-
-use App\Models\Todo;
 use App\Jobs\CompleteTodoItems;
+use App\Models\Todo;
+use Illuminate\Console\Command;
 
 class CompleteTodos extends Command
 {
@@ -28,7 +27,7 @@ class CompleteTodos extends Command
      */
     public function handle()
     {
-        Todo::where('status', 'pending')->chunk(100, function($chunk){
+        Todo::where('status', 'pending')->chunk(100, function ($chunk) {
             CompleteTodoItems::dispatch($chunk);
         });
     }
