@@ -9,7 +9,7 @@ class TodoController extends Controller
     // Fetch paginated todos here
     public function index()
     {
-        $todos = Todo::latest()->paginate(10);
+        $todos = Todo::orderBy('id')->paginate(10);
 
         return response()->json($todos);
     }
